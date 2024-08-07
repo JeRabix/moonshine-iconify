@@ -1,5 +1,5 @@
 {
-    "name": ":vendor_name/:package_name",
+    "name": "jerabix/moonshine-iconify",
     "description": "Description",
     "keywords": ["keyword"],
     "type": "library",
@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\PackageName\\": "src/"
+            "JeRabix\\MoonshineIconify\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\PackageName\\Tests\\": "tests/",
-            "VendorName\\PackageName\\Database\\Factories\\": "database/factories/"
+            "JeRabix\\MoonshineIconify\\Tests\\": "tests/",
+            "JeRabix\\MoonshineIconify\\Database\\Factories\\": "database/factories/"
         }
     },
     "conflict": {
@@ -49,7 +49,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\PackageName\\Providers\\PackageNameServiceProvider"
+              "JeRabix\\MoonshineIconify\\Providers\\MoonshineIconifyServiceProvider"
             ]
         }
     }
