@@ -3,17 +3,17 @@
     "description": "Description",
     "keywords": ["keyword"],
     "type": "library",
-    "homepage": "https://moonshine.cutcode.dev",
+    "homepage": "https://github.com/JeRabix",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/:vendor_name/:package_name/issues",
-        "source": "https://github.com/:vendor_name/:package_name"
+        "issues": "https://github.com/JeRabix/moonshine-iconify/issues",
+        "source": "https://github.com/JeRabix/moonshine-iconify"
     },
     "authors": [
         {
-            "name": "Author name",
-            "email": "author@example.com",
-            "homepage": "https://example.com"
+            "name": "Evgeniy Yurchenko",
+            "email": "rabix346@gmail.com",
+            "homepage": "https://github.com/JeRabix"
         }
     ],
     "require": {
