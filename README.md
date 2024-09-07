@@ -4,8 +4,8 @@
 
 <p align="center">
 <b>
-    <a href="https://github.com/JeRabix/moonshine-iconify/raw/master/README.md">EN</a> |
-    <a href="https://github.com/JeRabix/moonshine-iconify/raw/master/README_RU.md">RU</a>
+    <a href="https://github.com/JeRabix/moonshine-iconify">EN</a> |
+    <a href="https://github.com/JeRabix/moonshine-iconify/blob/master/README_RU.md">RU</a>
 </b>
 </p>
 
