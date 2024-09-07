@@ -1,4 +1,4 @@
-## Moonshine-Iconify - integrate iconify library for [Moonshine](https://github.com/moonshine-software/moonshine) admin panel
+## Moonshine-Iconify - integrate [Iconify](https://iconify.design/) library for [Moonshine](https://github.com/moonshine-software/moonshine) admin panel
 
 ![logo](https://github.com/JeRabix/moonshine-iconify/raw/master/art/logo-new.png)
 
@@ -9,7 +9,7 @@ Install composer package
 composer require jerabix/moonshine-iconify
 ```
 
-Publish icon.blade.php file from package:
+Publish `icon.blade.php` file from package:
 ```bash
 php artisan vendor:publish --tag="moonshine-iconify-blade"
 ```
