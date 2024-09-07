@@ -1,5 +1,7 @@
 ## Moonshine-Iconify - integrate iconify library for [Moonshine](https://github.com/moonshine-software/moonshine) admin panel
 
+![logo](https://github.com/JeRabix/moonshine-iconify/raw/master/art/logo.png)
+
 ## Installation
 
 Install composer package
