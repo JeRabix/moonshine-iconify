@@ -26,6 +26,10 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../resources/views/icon.blade.php' => resource_path('views/vendor/moonshine/components/icon.blade.php'),
-        ]);
+        ], 'moonshine-iconify-blade');
+
+        $this->publishes([
+            __DIR__ . '/../../config/moonshine-iconify.php' => config_path('moonshine-iconify.php'),
+        ], 'moonshine-iconify-config');
     }
 }
