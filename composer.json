@@ -3,7 +3,7 @@
     "description": "Integrate iconify library to Moonshine",
     "keywords": ["laravel", "moonshine", "iconify", "icon"],
     "type": "library",
-    "homepage": "https://t.me/rabix346",
+    "homepage": "https://github.com/JeRabix",
     "license": "MIT",
     "support": {
         "issues": "https://github.com/JeRabix/moonshine-iconify/issues",
@@ -13,7 +13,7 @@
         {
             "name": "Evgeniy Yurchenko",
             "email": "rabix346@gmail.com",
-            "homepage": "https://t.me/rabix346"
+            "homepage": "https://github.com/JeRabix"
         }
     ],
     "require": {
