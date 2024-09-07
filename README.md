@@ -2,14 +2,23 @@
 
 ![logo](https://github.com/JeRabix/moonshine-iconify/raw/master/art/logo-new.png)
 
+<p align="center">
+<b>
+    <a href="https://github.com/JeRabix/moonshine-iconify/raw/master/README.md">EN</a> |
+    <a href="https://github.com/JeRabix/moonshine-iconify/raw/master/README_RU.md">RU</a>
+</b>
+</p>
+
 ## Installation
 
 Install composer package
+
 ```bash
 composer require jerabix/moonshine-iconify
 ```
 
 Publish `icon.blade.php` file from package:
+
 ```bash
 php artisan vendor:publish --tag="moonshine-iconify-blade"
 ```
@@ -17,6 +26,7 @@ php artisan vendor:publish --tag="moonshine-iconify-blade"
 This command put file `icon.blade.php` in `resources/views/vendor/moonshine/components` folder.
 
 (Optional) You can also publish config file from package:
+
 ```bash
 php artisan vendor:publish --tag="moonshine-iconify-config"
 ```
@@ -34,3 +44,7 @@ Iconify icons can be found [here](https://icon-sets.iconify.design/).
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------|
 | iconify_script_url   | URL for load iconify script. By default use CDN link from official website.                                                                                                 | NULL              |
 | icon_size_multiplier | Moonshine icons and iconify icons has different size measurements. Therefore, some kind of multiplier is required so that moonshine icons and iconify do not differ in size | 3.2               |
+
+## TODO
+
+ - [ ] Add command for download all usage icons from iconify. For use icons from locale instead of CDN.
