@@ -1,23 +1,23 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": "Description",
-    "keywords": ["keyword"],
+    "name": "jerabix/moonshine-iconify",
+    "description": "Integrate iconify library to Moonshine",
+    "keywords": ["laravel", "moonshine", "iconify", "icon"],
     "type": "library",
-    "homepage": "https://moonshine.cutcode.dev",
+    "homepage": "https://t.me/rabix346",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/:vendor_name/:package_name/issues",
-        "source": "https://github.com/:vendor_name/:package_name"
+        "issues": "https://github.com/JeRabix/moonshine-iconify/issues",
+        "source": "https://github.com/JeRabix/moonshine-iconify"
     },
     "authors": [
         {
-            "name": "Author name",
-            "email": "author@example.com",
-            "homepage": "https://example.com"
+            "name": "Evgeniy Yurchenko",
+            "email": "rabix346@gmail.com",
+            "homepage": "https://t.me/rabix346"
         }
     ],
     "require": {
-        "php": "^8.0|^8.1|^8.2",
+        "php": "^8.0|^8.1|^8.2|^8.3",
         "ext-curl": "*",
         "ext-json": "*"
     },
@@ -30,13 +30,13 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\PackageName\\": "src/"
+            "JeRabix\\MoonshineIconify\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\PackageName\\Tests\\": "tests/",
-            "VendorName\\PackageName\\Database\\Factories\\": "database/factories/"
+            "JeRabix\\MoonshineIconify\\Tests\\": "tests/",
+            "JeRabix\\MoonshineIconify\\Database\\Factories\\": "database/factories/"
         }
     },
     "conflict": {
@@ -49,7 +49,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\PackageName\\Providers\\PackageNameServiceProvider"
+              "JeRabix\\MoonshineIconify\\Providers\\MoonshineIconifyServiceProvider"
             ]
         }
     }
