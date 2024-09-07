@@ -10,5 +10,5 @@ return [
     /**
      * Size for moonshine icons multiplied by this multiplier
      */
-    'icon_size_multiplier' => 1,
+    'icon_size_multiplier' => 3.2,
 ];
