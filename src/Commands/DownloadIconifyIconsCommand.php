@@ -17,6 +17,7 @@ use JeRabix\MoonshineIconify\Detectors\UrlComponentDetector;
 use JeRabix\MoonshineIconify\Detectors\WithIconTraitDetector;
 use JeRabix\MoonshineIconify\Detectors\IconComponentDetector;
 use JeRabix\MoonshineIconify\Detectors\IconAttributeDetector;
+use SplFileInfo;
 
 class DownloadIconifyIconsCommand extends Command
 {
@@ -25,7 +26,9 @@ class DownloadIconifyIconsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'moonshine-iconify:icons:download';
+    protected $signature = 'moonshine-iconify:icons:download
+        {--force : Force download icons}
+    ';
 
     /**
      * The console command description.
@@ -42,32 +45,34 @@ class DownloadIconifyIconsCommand extends Command
      */
     protected array $foundIcons = [];
 
+    /** @var string[] */
+    protected array $alreadyDownloadedIcons = [];
+
+    /** @var string[] */
+    protected array $needDownloadIcons = [];
+
     public function handle(): void
     {
+        $isForce = boolval($this->option('force'));
+
         $this->scanSources(app_path());
 
         $this->findUsedIcons();
 
-        $baseUrl = 'https://api.iconify.design';
+        $this->findCurrentDownloadedIcons();
 
-        foreach ($this->foundIcons as $icon) {
-            $iconData = explode(':', $icon);
-
-            $iconSet = $iconData[0];
-            $iconName = $iconData[1];
-
-            $apiUrl = $baseUrl . '/' . $iconSet . '/' . $iconName . '.svg';
-
-            $path = resource_path("views/vendor/moonshine/ui/icons/iconify/$iconSet");
-
-            if (!File::isDirectory($path)) {
-                File::makeDirectory($path, recursive: true);
-            }
-
-            $iconContent = file_get_contents($apiUrl);
-
-            file_put_contents("$path/$iconName.blade.php", $iconContent);
+        if ($isForce) {
+            $this->needDownloadIcons = $this->foundIcons;
+        } else {
+            $this->needDownloadIcons = array_diff(
+                $this->foundIcons,
+                $this->alreadyDownloadedIcons,
+            );
         }
+
+        $this->downloadIcons();
+
+        $this->removeNotUsedIcons();
     }
 
     protected function scanSources(string $source): void
@@ -115,5 +120,73 @@ class DownloadIconifyIconsCommand extends Command
         $icons = array_values($icons);
 
         $this->foundIcons = $icons;
+    }
+
+    private function findCurrentDownloadedIcons(): void
+    {
+        $source = resource_path('views/vendor/moonshine/ui/icons/iconify');
+        $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source));
+        $files = new RegexIterator($files, '/\.blade\.php$/');
+
+        foreach ($files as $file) {
+            /** @var SplFileInfo $file */
+
+            $iconSet = last(explode('/', $file->getPath()));
+
+            if ($iconSet === 'iconify') {
+                continue;
+            }
+
+            $iconName = explode('.', $file->getFilename())[0] ?? null;
+
+            if (!$iconName || !$iconSet) {
+                continue;
+            }
+
+            $this->alreadyDownloadedIcons[] = $iconSet . ':' . $iconName;
+        }
+    }
+
+    private function downloadIcons(): void
+    {
+        $baseUrl = 'https://api.iconify.design';
+
+        foreach ($this->foundIcons as $icon) {
+            $iconData = explode(':', $icon);
+
+            $iconSet = $iconData[0];
+            $iconName = $iconData[1];
+
+            $apiUrl = $baseUrl . '/' . $iconSet . '/' . $iconName . '.svg';
+
+            $path = resource_path("views/vendor/moonshine/ui/icons/iconify/$iconSet");
+
+            if (!File::isDirectory($path)) {
+                File::makeDirectory($path, recursive: true);
+            }
+
+            $iconContent = file_get_contents($apiUrl);
+
+            file_put_contents("$path/$iconName.blade.php", $iconContent);
+        }
+    }
+
+    private function removeNotUsedIcons(): void
+    {
+        $notUsedIcons = array_diff($this->alreadyDownloadedIcons, $this->foundIcons);
+
+        $notUsedIconsPaths = array_map(function (string $icon) {
+            $iconData = explode(':', $icon);
+            $iconSet = $iconData[0];
+            $iconName = $iconData[1];
+
+            return resource_path("views/vendor/moonshine/ui/icons/iconify/$iconSet/$iconName.blade.php");
+        }, $notUsedIcons);
+
+        foreach ($notUsedIconsPaths as $path) {
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
     }
 }
