@@ -3,10 +3,10 @@
 namespace JeRabix\MoonshineIconify\Detectors;
 
 
+use ReflectionAttribute;
 use ReflectionClass;
 use MoonShine\Attributes\Icon;
 use PhpParser\Node\Stmt\Class_;
-use App\MoonShine\Resources\MoonShineUserRoleResource;
 
 class IconAttributeDetector extends AbstractDetector
 {
@@ -18,12 +18,24 @@ class IconAttributeDetector extends AbstractDetector
         // ->icon() method
         $this->nodeFinder->find($stmt, function ($node) {
             if (
-                $node instanceof Class_ &&
-                $node->namespacedName->toString() === MoonShineUserRoleResource::class
+                $node instanceof Class_
             ) {
                 $ref = new ReflectionClass($node->namespacedName->toString());
 
-                dd($ref->getAttributes(Icon::class));
+                /** @var ?ReflectionAttribute $targetAttribute */
+                $targetAttribute = $ref->getAttributes(Icon::class)[0] ?? null;
+
+                if (!$targetAttribute) {
+                    return false;
+                }
+
+                $iconName = $targetAttribute->getArguments()[0] ?? null;
+
+                if ($iconName) {
+                    $this->findIcons[] = $iconName;
+                }
+
+                return false;
             }
 
             return false;

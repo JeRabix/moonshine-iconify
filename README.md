@@ -50,6 +50,7 @@ Iconify icons can be found [here](https://icon-sets.iconify.design/).
  - [x] [Local icons mode] Detect `WithIcon` trait on classes
  - [x] [Local icons mode] Detect `Url` class
  - [x] [Local icons mode] Add `Icon` class detector
- - [ ] [Local icons mode] Model resource detect `Icon` attribute
+ - [x] [Local icons mode] Detect `Icon` attribute usage
  - [ ] [Local icons mode] Remove not used icons
  - [ ] [Local icons mode] Add `mode` to config to change dynamic/static icons mode
+ - [ ] [Local icons mode] Not download all icons every run command, only new
