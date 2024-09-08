@@ -53,5 +53,7 @@ Iconify icons can be found [here](https://icon-sets.iconify.design/).
  - [x] [Local icons mode] Detect `Icon` attribute usage
  - [x] [Local icons mode] Remove not used icons
  - [x] [Local icons mode] Not download all icons every run command, only new
- - [ ] [Local icons mode] Add `mode` to config to change dynamic/static icons mode
- - [ ] [Local icons mode] Add button to ignition error page
+ - [x] [Local icons mode] Add `mode` to config to change dynamic/static icons mode
+ - [x] Add button to ignition error page
+ - [ ] Refactor detect logic
+ - [ ] Add tests for detect logic

@@ -2,6 +2,9 @@
 
 namespace JeRabix\MoonshineIconify\Commands;
 
+use Exception;
+use Illuminate\Support\Facades\Http;
+use JeRabix\MoonshineIconify\Detectors\DetectorContract;
 use RegexIterator;
 use PhpParser\NodeFinder;
 use PhpParser\ParserFactory;
@@ -55,7 +58,7 @@ class DownloadIconifyIconsCommand extends Command
     {
         $isForce = boolval($this->option('force'));
 
-        $this->scanSources(app_path());
+        $this->scanSources(config('moonshine-iconify.detect_icons_path', app_path()));
 
         $this->findUsedIcons();
 
@@ -72,7 +75,9 @@ class DownloadIconifyIconsCommand extends Command
 
         $this->downloadIcons();
 
-        $this->removeNotUsedIcons();
+        if (config('moonshine-iconify.delete_not_used_icons', true)) {
+            $this->deleteNotUsedIcons();
+        }
     }
 
     protected function scanSources(string $source): void
@@ -109,6 +114,18 @@ class DownloadIconifyIconsCommand extends Command
                 (new IconComponentDetector($nodeFinder))->detect($fileCode),
                 (new IconAttributeDetector($nodeFinder))->detect($fileCode),
             );
+
+            /**
+             * @var class-string<DetectorContract>[] $additionalDetectors
+             */
+            $additionalDetectors = config('moonshine-iconify.additional_detectors', []);
+
+            foreach ($additionalDetectors as $detector) {
+                $icons = array_merge(
+                    $icons,
+                    (new $detector($nodeFinder))->detect($fileCode),
+                );
+            }
         }
 
         $icons = array_unique($icons);
@@ -165,13 +182,17 @@ class DownloadIconifyIconsCommand extends Command
                 File::makeDirectory($path, recursive: true);
             }
 
-            $iconContent = file_get_contents($apiUrl);
+            $iconContent = Http::get($apiUrl)->body();
+
+            if ($iconContent === '404') {
+                throw new Exception("Cannot download icon: $icon. By API url: $apiUrl");
+            }
 
             file_put_contents("$path/$iconName.blade.php", $iconContent);
         }
     }
 
-    private function removeNotUsedIcons(): void
+    private function deleteNotUsedIcons(): void
     {
         $notUsedIcons = array_diff($this->alreadyDownloadedIcons, $this->foundIcons);
 

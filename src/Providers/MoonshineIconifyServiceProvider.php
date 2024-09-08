@@ -6,6 +6,7 @@ namespace JeRabix\MoonshineIconify\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use JeRabix\MoonshineIconify\Commands\DownloadIconifyIconsCommand;
+use JeRabix\MoonshineIconify\Enums\WorkingMode;
 
 final class MoonshineIconifyServiceProvider extends ServiceProvider
 {
@@ -24,6 +25,12 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
         moonshineAssets()->add([
             config('moonshine-iconify.iconify_script_url') ?? 'https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js',
         ]);
+
+        if (config('moonshine-iconify.working_mode') === WorkingMode::ICONIFY_COMPONENT_MODE) {
+            moonshineAssets()->add([
+                config('moonshine-iconify.iconify_script_url') ?? 'https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js',
+            ]);
+        }
 
         $this->publishes([
             __DIR__ . '/../../resources/views/icon.blade.php' => resource_path('views/vendor/moonshine/components/icon.blade.php'),
