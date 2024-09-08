@@ -13,7 +13,7 @@ class IconAttributeDetector extends AbstractDetector
     /**
      * @inheritdoc
      */
-    public function detect(array $stmt): array
+    public function findIcons(array $stmt): array
     {
         // ->icon() method
         $this->nodeFinder->find($stmt, function ($node) {

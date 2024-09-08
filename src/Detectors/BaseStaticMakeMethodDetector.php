@@ -28,7 +28,7 @@ abstract class BaseStaticMakeMethodDetector extends AbstractDetector
         }
     }
 
-    public function detect(array $stmt): array
+    public function findIcons(array $stmt): array
     {
         // static call ::make
         $this->nodeFinder->find($stmt, function ($node) {

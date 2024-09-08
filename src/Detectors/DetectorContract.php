@@ -11,5 +11,5 @@ interface DetectorContract
      *
      * @return string[]
      */
-    public function detect(array $stmt): array;
+    public function findIcons(array $stmt): array;
 }
