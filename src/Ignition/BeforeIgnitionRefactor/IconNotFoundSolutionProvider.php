@@ -1,9 +1,9 @@
 <?php
 
-namespace JeRabix\MoonshineIconify\Ignition;
+namespace JeRabix\MoonshineIconify\Ignition\BeforeIgnitionRefactor;
 
 use Illuminate\Support\Arr;
-use Spatie\ErrorSolutions\Contracts\HasSolutionsForThrowable;
+use Spatie\Ignition\Contracts\HasSolutionsForThrowable;
 use Spatie\LaravelIgnition\Exceptions\ViewException;
 use Throwable;
 

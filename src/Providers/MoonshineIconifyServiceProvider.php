@@ -8,7 +8,6 @@ use Composer\InstalledVersions;
 use Illuminate\Support\ServiceProvider;
 use JeRabix\MoonshineIconify\Commands\DownloadIconifyIconsCommand;
 use JeRabix\MoonshineIconify\Enums\WorkingMode;
-use JeRabix\MoonshineIconify\Ignition\IconNotFoundSolutionProvider;
 
 final class MoonshineIconifyServiceProvider extends ServiceProvider
 {
@@ -30,9 +29,11 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
             if (version_compare($spatieIgnitionVersion, '2.8.0', '>=')) {
                 $rep = app(\Spatie\ErrorSolutions\SolutionProviderRepository::class);
 
-                $rep->registerSolutionProvider(IconNotFoundSolutionProvider::class);
+                $rep->registerSolutionProvider(\JeRabix\MoonshineIconify\Ignition\IconNotFoundSolutionProvider::class);
             } else {
-                // TODO: Add support error page for spatie/laravel-ignition < 2.8.0
+                $rep = app(\Spatie\Ignition\Contracts\SolutionProviderRepository::class);
+
+                $rep->registerSolutionProvider(\JeRabix\MoonshineIconify\Ignition\BeforeIgnitionRefactor\IconNotFoundSolutionProvider::class);
             }
         }
 
