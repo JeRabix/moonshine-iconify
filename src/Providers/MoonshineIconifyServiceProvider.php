@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace JeRabix\MoonshineIconify\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use JeRabix\MoonshineIconify\Commands\DownloadIconifyIconsCommand;
 
 final class MoonshineIconifyServiceProvider extends ServiceProvider
 {
@@ -31,5 +32,9 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../config/moonshine-iconify.php' => config_path('moonshine-iconify.php'),
         ], 'moonshine-iconify-config');
+
+        $this->commands(
+            DownloadIconifyIconsCommand::class
+        );
     }
 }
