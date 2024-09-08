@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace JeRabix\MoonshineIconify\Providers;
 
+use Composer\InstalledVersions;
 use Illuminate\Support\ServiceProvider;
 use JeRabix\MoonshineIconify\Commands\DownloadIconifyIconsCommand;
 use JeRabix\MoonshineIconify\Enums\WorkingMode;
 use JeRabix\MoonshineIconify\Ignition\IconNotFoundSolutionProvider;
-use Spatie\ErrorSolutions\Contracts\SolutionProviderRepository as SolutionProviderRepositoryContract;
 
 final class MoonshineIconifyServiceProvider extends ServiceProvider
 {
@@ -24,10 +24,17 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
             'moonshine-iconify',
         );
 
-        /** @var SolutionProviderRepositoryContract $rep */
-        $rep = app(SolutionProviderRepositoryContract::class);
+        if (InstalledVersions::isInstalled('spatie/laravel-ignition')) {
+            $spatieIgnitionVersion = InstalledVersions::getVersion('spatie/laravel-ignition');
 
-        $rep->registerSolutionProvider(IconNotFoundSolutionProvider::class);
+            if (version_compare($spatieIgnitionVersion, '2.8.0', '>=')) {
+                $rep = app(\Spatie\ErrorSolutions\SolutionProviderRepository::class);
+
+                $rep->registerSolutionProvider(IconNotFoundSolutionProvider::class);
+            } else {
+                // TODO: Add support error page for spatie/laravel-ignition < 2.8.0
+            }
+        }
 
         if (config('moonshine-iconify.working_mode') === WorkingMode::ICONIFY_COMPONENT_MODE) {
             moonshineAssets()->add([
