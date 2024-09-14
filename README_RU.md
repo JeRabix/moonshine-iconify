@@ -42,6 +42,18 @@ php artisan vendor:publish --tag="moonshine-iconify-config"
 
 Иконки Iconify можно найти [здесь](https://icon-sets.iconify.design/).
 
+## Режим работы
+
+Пакет имеет 2 режима работы:
+
+### ICONIFY_COMPONENT_MODE [iconify doc](https://iconify.design/docs/icon-components/#process)
+
+Используется компонент iconify. Загружает иконки из API iconify по необходимости и кэширует в localstorage пользователя, необходимо загружать JS скрипт iconify (пакет добавляет его автоматически).
+
+### DOWNLOAD_USAGE_ICONS_MODE
+
+Используйте команду пакета для загрузки используемых иконок iconify в проект. Необходимо повторно запустить команду для каждой новой иконки iconify в проекте.
+
 ## Конфигурация
 
 | **Ключ**              | **Описание**                                                                                                                                                                               | **Значение по умолчанию**           |

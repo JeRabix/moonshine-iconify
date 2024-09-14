@@ -42,6 +42,18 @@ Package work as fallback if icon is not found in moonshine - use iconify library
 
 Iconify icons can be found [here](https://icon-sets.iconify.design/).
 
+## Working mode
+
+Package has 2 working mode:
+
+### ICONIFY_COMPONENT_MODE [iconify doc](https://iconify.design/docs/icon-components/#process)
+
+Used iconify component. Load icons from iconify API on demand, and cache to user localstorage, need load iconify JS script (package add it automatically).
+
+### DOWNLOAD_USAGE_ICONS_MODE
+
+Use package command for download used iconify icons to project. Need re-run command for each new iconify icon in project.
+
 ## Config
 
 | **Key**               | **Description**                                                                                                                                                                                               | **Default value**                   |
