@@ -12,7 +12,7 @@ class IconNotFoundSolution implements RunnableSolution
 
     public function getSolutionActionDescription(): string
     {
-        return 'Download usage iconify icons';
+        return 'Run command: php artisan moonshine-iconify:icons:download';
     }
 
     public function getRunButtonText(): string
