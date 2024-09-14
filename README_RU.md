@@ -1,31 +1,31 @@
-## Moonshine-Iconify - интегрирует [Iconify](https://iconify.design/) библиотеку в [Moonshine](https://github.com/moonshine-software/moonshine) админ панель
+## Moonshine-Iconify - интегрируйте библиотеку [Iconify](https://iconify.design/) для панели администратора [Moonshine](https://github.com/moonshine-software/moonshine)
 
 ![logo](https://github.com/JeRabix/moonshine-iconify/raw/master/art/logo-new.png)
 
 <p align="center">
 <b>
-    <a href="https://github.com/JeRabix/moonshine-iconify/raw/master/README.md">EN</a> |
-    <a href="https://github.com/JeRabix/moonshine-iconify/raw/master/README_RU.md">RU</a>
+<a href="https://github.com/JeRabix/moonshine-iconify">EN</a> |
+<a href="https://github.com/JeRabix/moonshine-iconify/blob/master/README_RU.md">RU</a>
 </b>
 </p>
 
 ## Установка
 
-Установите composer пакет из командной строки:
+Установить пакет composer
 
 ```bash
 composer require jerabix/moonshine-iconify
 ```
 
-Опубликуйте файл `icon.blade.php` из пакета:
+Опубликовать файл `icon.blade.php` из пакета:
 
 ```bash
 php artisan vendor:publish --tag="moonshine-iconify-blade"
 ```
 
-Эта команда поместит файл `icon.blade.php` в папку `resources/views/vendor/moonshine/components`.
+Эта команда помещает файл `icon.blade.php` в папку `resources/views/vendor/moonshine/components`.
 
-(Опционально) Вы можете также опубликовать файл конфигурации из пакета:
+(Необязательно) Вы также можете опубликовать файл конфигурации из пакета:
 
 ```bash
 php artisan vendor:publish --tag="moonshine-iconify-config"
@@ -33,14 +33,34 @@ php artisan vendor:publish --tag="moonshine-iconify-config"
 
 ## Использование
 
-Используйте moonshine `Icon` компонент как обычно
-пакет работает как фоллбэк, если иконка не найдена в moonshine - используется библиотека iconify.
+При использовании `ICONIFY_COMPONENT_MODE` - вам не нужны дополнительные действия.
 
-Iconify иконки можно найти [здесь](https://icon-sets.iconify.design/).
+При использовании `DOWNLOAD_USAGE_ICONS_MODE` - вам нужно выполнить команду: `php artisan moonshine-iconify:icons:download` для загрузки всех иконок используемых в проекте.
 
-## Конфиг
+Используйте компонент Moonshine по умолчанию `Icon`, как и раньше.
+Пакет работает как запасной вариант, если иконка не найдена в Moonshine - используйте библиотеку iconify.
 
-| **Ключ**             | **Описание**                                                                                                                                     | **По умолчанию** |
-|----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|------------------|
-| iconify_script_url   | URL для загрузки скрипта iconify. По умолчанию используется ссылка CDN с официального сайта.                                                     | NULL             |
-| icon_size_multiplier | Значки Moonshine и iconify имеют разные размеры. Поэтому требуется какой-то множитель, чтобы значки moonshine и iconify не отличались по размеру | 3.2              |
+Иконки Iconify можно найти [здесь](https://icon-sets.iconify.design/).
+
+## Конфигурация
+
+| **Ключ**              | **Описание**                                                                                                                                                                               | **Значение по умолчанию**           |
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| working_mode          | Режим рабочего пакета, может быть WorkingMode::ICONIFY_COMPONENT_MODE или WorkingMode::DOWNLOAD_USAGE_ICONS_MODE, для получения дополнительной информации см. описание перечисления        | WorkingMode::ICONIFY_COMPONENT_MODE |
+| iconify_script_url    | (Только для ICONIFY_COMPONENT_MODE) URL для загрузки скрипта iconify. По умолчанию используется ссылка CDN с официального сайта.                                                           | NULL                                |
+| icon_size_multiplier  | (Только для ICONIFY_COMPONENT_MODE) Иконки Moonshine и iconify имеют разные размеры. Поэтому требуется какой-то множитель, чтобы иконки moonshine и iconify не отличались по размеру       | 3.2                                 |
+| additional_detectors  | (Только для DOWNLOAD_USAGE_ICONS_MODE) Дополнительные детекторы для иконок moonshine. Если у вас есть собственные классы с использованием иконок, вам нужно создать детекторы для классов. | []                                  |
+| delete_not_used_icons | (Только для DOWNLOAD_USAGE_ICONS_MODE) Удалить неиспользуемые иконки в команде загрузки?                                                                                                   | true                                |
+| detect_icons_path     | (Только для DOWNLOAD_USAGE_ICONS_MODE) Путь для обнаружения использования иконок                                                                                                           | app_path()                          |
+
+## Детектор N имеет ошибку: X
+
+Когда у вас есть ошибка: `Detector {DetectorClass} has error: {Error}. Details in log file`
+
+Создайте issue [тут](https://github.com/JeRabix/moonshine-iconify/issues/new). И предоставьте информацию из файла логов.
+
+## Иконка не загружается командой
+
+Если у вас есть собственный класс с использованием иконки, вам нужно создать детектор для класса. Посмотрите для примера класс IconComponentDetector.
+
+Если класс предоставляется из Moonshine - вы можете создать issue [тут](https://github.com/JeRabix/moonshine-iconify/issues/new).
