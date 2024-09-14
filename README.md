@@ -47,4 +47,14 @@ Iconify icons can be found [here](https://icon-sets.iconify.design/).
 
 ## TODO
 
- - [ ] Add command for download all usage icons from iconify. For use icons from locale instead of CDN.
+ - [x] [Local icons mode] Detect `WithIcon` trait on classes
+ - [x] [Local icons mode] Detect `Url` class
+ - [x] [Local icons mode] Add `Icon` class detector
+ - [x] [Local icons mode] Detect `Icon` attribute usage
+ - [x] [Local icons mode] Remove not used icons
+ - [x] [Local icons mode] Not download all icons every run command, only new
+ - [x] [Local icons mode] Add `mode` to config to change dynamic/static icons mode
+ - [x] Add button to ignition error page
+ - [x] Refactor detect logic
+ - [ ] Add tests for detect logic
+ - [ ] Update README file for new working mode
