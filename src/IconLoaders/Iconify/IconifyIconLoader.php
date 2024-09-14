@@ -2,7 +2,9 @@
 
 namespace JeRabix\MoonshineIconify\IconLoaders\Iconify;
 
+use Closure;
 use Exception;
+use Throwable;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
 use JeRabix\MoonshineIconify\Detectors\DetectorContract;
@@ -44,10 +46,11 @@ class IconifyIconLoader
      * @param class-string<DetectorContract>[] $additionalDetectors
      */
     public function __construct(
-        private readonly string $scanPath,
-        private readonly bool $isForceLoad = false,
-        private readonly bool $isDeleteNotUsedIcons = true,
-        private readonly array $additionalDetectors = [],
+        private readonly string   $scanPath,
+        private readonly bool     $isForceLoad = false,
+        private readonly bool     $isDeleteNotUsedIcons = true,
+        private readonly array    $additionalDetectors = [],
+        private readonly ?Closure $detectorThrowCallback = null,
     )
     {
     }
@@ -104,10 +107,18 @@ class IconifyIconLoader
             $fileCode = $traverser->traverse($fileCode);
 
             foreach ($this->iconDetectors as $detector) {
-                $icons = array_merge(
-                    $icons,
-                    (new $detector($nodeFinder))->findIcons($fileCode),
-                );
+                try {
+                    $icons = array_merge(
+                        $icons,
+                        (new $detector($nodeFinder))->findIcons($fileCode),
+                    );
+                } catch (Throwable $throwable) {
+                    report($throwable);
+
+                    if ($this->detectorThrowCallback) {
+                        ($this->detectorThrowCallback)($detector, $throwable);
+                    }
+                }
             }
         }
 

@@ -2,6 +2,7 @@
 
 namespace JeRabix\MoonshineIconify\Commands;
 
+use Throwable;
 use JeRabix\MoonshineIconify\Detectors\DetectorContract;
 use JeRabix\MoonshineIconify\IconLoaders\Iconify\IconifyIconLoader;
 use Illuminate\Console\Command;
@@ -39,9 +40,14 @@ class DownloadIconifyIconsCommand extends Command
             $isForce,
             $isDeleteNotUsedIcons,
             $additionalDetectors,
+            function (string $detectorClass, Throwable $throwable) {
+                $this->info("Detector $detectorClass has error: {$throwable->getMessage()}. Details in log file.");
+            }
         );
 
         $loader->run();
+
+        $this->info('Icons downloaded successfully.');
     }
 
 }
