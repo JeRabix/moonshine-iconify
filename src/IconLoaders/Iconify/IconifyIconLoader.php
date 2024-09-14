@@ -182,6 +182,13 @@ class IconifyIconLoader
                 throw new Exception("Cannot download icon: $icon. By API url: $apiUrl");
             }
 
+            $iconContent = str_replace(
+                'width="1em" height="1em"',
+                'class="fill-current w-{{ $size ?? 5 }} h-{{ $size ?? 5 }} {{ $class ?? \'\' }} {{ !empty($color) ? "text-$color" : \'\' }}"',
+                $iconContent
+            );
+
+
             file_put_contents("$path/$iconName.blade.php", $iconContent);
         }
     }
