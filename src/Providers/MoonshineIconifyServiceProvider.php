@@ -27,7 +27,7 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
             $spatieIgnitionVersion = InstalledVersions::getVersion('spatie/laravel-ignition');
 
             if (version_compare($spatieIgnitionVersion, '2.8.0', '>=')) {
-                $rep = app(\Spatie\ErrorSolutions\SolutionProviderRepository::class);
+                $rep = app(\Spatie\ErrorSolutions\Contracts\SolutionProviderRepository::class);
 
                 $rep->registerSolutionProvider(\JeRabix\MoonshineIconify\Ignition\IconNotFoundSolutionProvider::class);
             } else {
