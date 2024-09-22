@@ -35,7 +35,11 @@ php artisan vendor:publish --tag="moonshine-iconify-config"
 
 When you use `ICONIFY_COMPONENT_MODE` - you not need additional actions.
 
-When you use `DOWNLOAD_USAGE_ICONS_MODE` - you need run command: `php artisan moonshine-iconify:icons:download` for download all usage icons in project.
+When you use `DOWNLOAD_USAGE_ICONS_MODE` - you need run command:
+```bash
+php artisan moonshine-iconify:icons:download
+```
+for download all usage icons in project.
 
 Use moonshine default `Icon` component as before.
 Package work as fallback if icon is not found in moonshine - use iconify library.
