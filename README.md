@@ -9,6 +9,14 @@
 </b>
 </p>
 
+## Versions
+
+| Moonshine | Moonshine-iconify |
+|-----------|-------------------|
+| v2        | v1                |
+| v3        | v2                |
+
+
 ## Installation
 
 Install composer package
