@@ -18,35 +18,45 @@
 @endphp
 
 
-@if($icon && View::exists("$checkPath.$icon"))
-    @include("moonshine::icons.$icon", array_merge([
-        'size' => $size,
-        'color' => $color,
-        'icon' => $icon,
-        'path' => $path,
-    ]))
-@elseif ($iconifyWorkingMode === WorkingMode::DOWNLOAD_USAGE_ICONS_MODE)
-    @php
-        $iconifyIconParts = explode(':', $icon);
+<div {{ $attributes->class([
+    'text-current',
+    'w-' . ($size ?? 5),
+    'h-' . ($size ?? 5),
+    "text-$color" => !empty($color),
+]) }}>
 
-        $iconifyIconName = $iconifyIconParts[1] ?? null;
-        $iconifyIconSet = $iconifyIconParts[0] ?? null;
-    @endphp
+    @if($slot?->isNotEmpty())
+        {!! $slot !!}
+    @elseif($icon && View::exists("$checkPath.$icon"))
+        @include("moonshine::icons.$icon", array_merge([
+            'size' => $size,
+            'color' => $color,
+            'icon' => $icon,
+            'path' => $path,
+        ]))
+    @elseif ($iconifyWorkingMode === WorkingMode::DOWNLOAD_USAGE_ICONS_MODE)
+        @php
+            $iconifyIconParts = explode(':', $icon);
 
-    @include("moonshine::ui.icons.iconify.$iconifyIconSet.$iconifyIconName", array_merge([
-        'size' => $size,
-        'class' => $class,
-        'color' => $color
-    ]))
-@elseif($iconifyWorkingMode === WorkingMode::ICONIFY_COMPONENT_MODE)
-    @php
-        /** @var int $iconSizeMultiplier */
-        $iconSizeMultiplier = config('moonshine-iconify.icon_size_multiplier', 3.2);
-    @endphp
+            $iconifyIconName = $iconifyIconParts[1] ?? null;
+            $iconifyIconSet = $iconifyIconParts[0] ?? null;
+        @endphp
 
-    <iconify-icon icon="{{$icon}}"
-                  style="color: {{$color}};font-size: {{$size * $iconSizeMultiplier}}px"
-                  class="{{$class}}"
-    >
-    </iconify-icon>
-@endif
+        @include("moonshine::ui.icons.iconify.$iconifyIconSet.$iconifyIconName", array_merge([
+            'size' => $size,
+            'class' => $class,
+            'color' => $color
+        ]))
+    @elseif($iconifyWorkingMode === WorkingMode::ICONIFY_COMPONENT_MODE)
+        @php
+            /** @var int $iconSizeMultiplier */
+            $iconSizeMultiplier = config('moonshine-iconify.icon_size_multiplier', 3.2);
+        @endphp
+
+        <iconify-icon icon="{{$icon}}"
+                      style="color: {{$color}};font-size: {{$size * $iconSizeMultiplier}}px"
+                      class="{{$class}}"
+        >
+        </iconify-icon>
+    @endif
+</div>
