@@ -6,20 +6,24 @@
     'icon' => '',
     'size' => 5,
     'color' => '',
-    'class' => $attributes->get('class')
+    'class' => $attributes->get('class'),
+    'path' => '',
 ])
 
 @php
     /** @var WorkingMode $iconifyWorkingMode */
     $iconifyWorkingMode = config('moonshine-iconify.working_mode');
+
+    $checkPath = $path ?? 'moonshine::icons';
 @endphp
 
 
-@if($icon && View::exists("moonshine::ui.icons.$icon"))
-    @include("moonshine::ui.icons.$icon", array_merge([
+@if($icon && View::exists("$checkPath.$icon"))
+    @include("moonshine::icons.$icon", array_merge([
         'size' => $size,
-        'class' => $class,
-        'color' => $color
+        'color' => $color,
+        'icon' => $icon,
+        'path' => $path,
     ]))
 @elseif ($iconifyWorkingMode === WorkingMode::DOWNLOAD_USAGE_ICONS_MODE)
     @php

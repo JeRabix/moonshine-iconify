@@ -2,7 +2,7 @@
 
 namespace JeRabix\MoonshineIconify\Detectors;
 
-use MoonShine\Menu\MenuGroup;
+use MoonShine\MenuManager\MenuGroup;
 
 class MenuGroupDetector extends BaseStaticMakeMethodDetector
 {

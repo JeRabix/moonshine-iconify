@@ -2,7 +2,7 @@
 
 namespace JeRabix\MoonshineIconify\Detectors;
 
-use MoonShine\Components\Icon;
+use MoonShine\UI\Components\Icon;
 
 class IconComponentDetector extends BaseStaticMakeMethodDetector
 {

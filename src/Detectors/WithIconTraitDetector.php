@@ -3,7 +3,7 @@
 namespace JeRabix\MoonshineIconify\Detectors;
 
 use PhpParser\NodeAbstract;
-use MoonShine\Traits\WithIcon;
+use MoonShine\UI\Traits\WithIcon;
 use PhpParser\Node\Identifier;
 use PhpParser\Node\Scalar\String_;
 use PhpParser\Node\Expr\MethodCall;

@@ -2,7 +2,7 @@
 
 namespace JeRabix\MoonshineIconify\Detectors;
 
-use MoonShine\Menu\MenuItem;
+use MoonShine\MenuManager\MenuItem;
 
 class MenuItemDetector extends BaseStaticMakeMethodDetector
 {

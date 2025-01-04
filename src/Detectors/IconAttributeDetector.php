@@ -5,7 +5,7 @@ namespace JeRabix\MoonshineIconify\Detectors;
 
 use ReflectionAttribute;
 use ReflectionClass;
-use MoonShine\Attributes\Icon;
+use MoonShine\Support\Attributes\Icon;
 use PhpParser\Node\Stmt\Class_;
 
 class IconAttributeDetector extends AbstractDetector

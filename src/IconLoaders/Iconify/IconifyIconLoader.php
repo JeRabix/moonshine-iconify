@@ -136,6 +136,9 @@ class IconifyIconLoader
     private function findCurrentDownloadedIcons(): void
     {
         $source = resource_path('views/vendor/moonshine/ui/icons/iconify');
+
+        File::ensureDirectoryExists($source);
+
         $files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($source));
         $files = new RegexIterator($files, '/\.blade\.php$/');
 

@@ -2,7 +2,7 @@
 
 namespace JeRabix\MoonshineIconify\Detectors;
 
-use MoonShine\Components\Url;
+use MoonShine\UI\Components\Url;
 
 class UrlComponentDetector extends BaseStaticMakeMethodDetector
 {

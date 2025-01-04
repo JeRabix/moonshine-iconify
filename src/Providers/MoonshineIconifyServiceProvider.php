@@ -8,6 +8,8 @@ use Composer\InstalledVersions;
 use Illuminate\Support\ServiceProvider;
 use JeRabix\MoonshineIconify\Commands\DownloadIconifyIconsCommand;
 use JeRabix\MoonshineIconify\Enums\WorkingMode;
+use MoonShine\AssetManager\Raw;
+use MoonShine\Contracts\AssetManager\AssetManagerContract;
 
 final class MoonshineIconifyServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,7 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
         //
     }
 
-    public function boot(): void
+    public function boot(AssetManagerContract $assetManager): void
     {
         $this->mergeConfigFrom(
             __DIR__ . '/../../config/moonshine-iconify.php',
@@ -38,8 +40,10 @@ final class MoonshineIconifyServiceProvider extends ServiceProvider
         }
 
         if (config('moonshine-iconify.working_mode') === WorkingMode::ICONIFY_COMPONENT_MODE) {
-            moonshineAssets()->add([
-                config('moonshine-iconify.iconify_script_url') ?? 'https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js',
+            $scriptUrl = config('moonshine-iconify.iconify_script_url') ?? 'https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js';
+
+            $assetManager->add([
+                Raw::make('<script src="' . $scriptUrl . '"></script>')
             ]);
         }
 
