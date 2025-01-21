@@ -22,6 +22,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
 use SplFileInfo;
+use JeRabix\MoonshineIconify\Detectors\AlertComponentDetector;
 
 class IconifyIconLoader
 {
@@ -221,6 +222,7 @@ class IconifyIconLoader
             UrlComponentDetector::class,
             IconComponentDetector::class,
             IconAttributeDetector::class,
+            AlertComponentDetector::class,
         ];
 
         $this->iconDetectors = array_merge(
